@@ -9,27 +9,29 @@
   <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
   <link rel="stylesheet" type="text/css" href="/css/result-light.css">
   
+  
   <style type='text/css'>
-    .a1{
+	.a1{
 	    width: 400px;
 	    height: 400px;
 	    border: 1px solid red;    
 	}
 	.a2 {
 	    position: absolute;
-	    width: 80px;
-	    height: 80px;
-	    border:1px solid #EFEFEF;    
+	    width: 40px;
+	    height: 40px;
+	    border:1px solid gray;    
 	}
 	.ui-selected{
-	    border:1px solid orange;    
-	}
-	.ui-selecting{
 	    border:1px solid orange;    
 	}
 	.ui-state-disabled{
 	    opacity: 1;    
 	}
+	
+	#d1{   z-index:1; left:100px; top:150px;   }
+	#d2{   z-index:2; left:50px; width:200px; height:100px; top:100px   }
+	#d3{   z-index:3; left:150px; top:150px;   }
   </style>
   
 
@@ -56,8 +58,8 @@ $('.a2').resizable({
 });
 $('.a2').draggable({
     containment: 'parent',
-    start: function(){
-        buffer['start single drag'] = true;
+    start: function(event, ui){
+        buffer['start single drag'] = ui.helper;
     },
     stop: function(event, ui){
         buffer['start single drag'] = false;
@@ -99,14 +101,14 @@ function multiDraggable(){
     if(s.length == 1){
         $('.a2').draggable({
             containment: 'parent',
-            start: function(){
-                buffer['start single drag'] = true;
+            start: function(event, ui){
+                buffer['start single drag'] = ui.helper;
             },
             drag: function(){
                 return true;
             },
             stop: function(event, ui){
-                buffer['start single drag'] = false;
+                buffer['start single drag'] = null;
             }
         });
         return;
@@ -176,10 +178,11 @@ function containerMouseup(obj){
             $(obj.currentTarget).resizable('enable');
         }
     } else {
-        $(obj.currentTarget).resizable('enable');
+        var _obj = buffer['start single drag'] ? buffer['start single drag'] :  $(obj.currentTarget);
+        _obj.resizable('enable');
         $('.a2').removeClass('ui-selected');
-        $('.a2').not(obj.currentTarget).resizable('disable');
-        $(obj.currentTarget).addClass('ui-selected');
+        $('.a2').not(_obj).resizable('disable');
+        _obj.addClass('ui-selected');
     }
     multiDraggable()
  }
@@ -191,10 +194,10 @@ containerMouseup({});
 
 </head>
 <body>
-  <div id="d" class="a1">
-    <div id="d1" class="a2" style='left:50px;top:50px'>d1</div>
-    <div id="d2" class="a2" style='left:120px;top:150px'>d2</div>
-    <div id="d3" class="a2" style='left:220px;top:150px'>d3</div>
+<div id="d" class="a1">
+    <div id="d1" class="a2">low</div>
+    <div id="d2" class="a2">middle</div>
+    <div id="d3" class="a2">high</div>
 </div>
   
 </body>
