@@ -11,4 +11,6 @@ complete feature:
 
 --And with 'Ctrl' key.
 
+--Multi selected Draggable.
+
 Watch the demo online: http://jsfiddle.net/WCZ8d/40/
