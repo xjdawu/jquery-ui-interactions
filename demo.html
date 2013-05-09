@@ -113,7 +113,9 @@ function multiDraggable(){
     }
    	var initLeftOffset = [],initTopOffset = [];
     var mx = $('#d').position();
-    var wh = [$('#d').width(), $('#d').height()];
+    mx.left++;
+    mx.top++;
+    var wh = [$('#d').width()-2, $('#d').height()-2];
     $('.ui-selected').draggable({
         start: function(event, ui){
             var pos = $(this).position();
