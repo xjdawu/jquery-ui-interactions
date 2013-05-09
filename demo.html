@@ -10,8 +10,8 @@
   <link rel="stylesheet" type="text/css" href="/css/result-light.css">
   
   <style type='text/css'>
-  .a1{
-      width: 400px;
+    .a1{
+	    width: 400px;
 	    height: 400px;
 	    border: 1px solid red;    
 	}
@@ -22,6 +22,9 @@
 	    border:1px solid #EFEFEF;    
 	}
 	.ui-selected{
+	    border:1px solid orange;    
+	}
+	.ui-selecting{
 	    border:1px solid orange;    
 	}
 	.ui-state-disabled{
@@ -36,11 +39,11 @@ $(window).load(function(){
 var buffer = [];
 $('#d').selectable({
     filter: ".a2",
-    selecting: seling,
-    unselecting: unSeling,
     start: selStart,
-    stop: selStop,
-    selected: selDone
+    selecting: selSelecting,
+    unselecting: unSelecting,
+    selected: selSelected,
+    stop: selStop
 });
 $('.a2').resizable({
     start: function(event, ui){
@@ -61,34 +64,27 @@ $('.a2').draggable({
     }
 });
 function selStart(event, ui){
+	//console.log('selStart')
 }
-function seling(event,ui){
-    $(ui).addClass( "ui-selected" );
+function selSelecting(event,ui){
+	if(event.ctrlKey){
+ 		if( !$(ui.selecting).hasClass( "ui-resizable-disabled" ) ){
+			$(ui.selecting).removeClass( "ui-selecting" )
+		}
+	}
+	//console.log('selSelecting')
 }
-
-function unSeling(event,ui){
-    $(ui).removeClass( "ui-selected" );
+function unSelecting(event,ui){
+	//console.log('unSelecting')
 }
-
+function selSelected(event,ui){
+	//console.log('selSelected')
+}
 function enableResize(o, flag){
     o.resizable(flag ? 'enable' : 'disable');
     o.resizable('option', 'enable', flag);
     o.resizable('option', 'disable', !flag);
 }
-function selDone(event,ui){
-    if(event.ctrlKey) {
-        for(var o in ui){
-            if($(ui[o]).resizable( "option", "enable" )){
-                $(ui[o]).removeClass('ui-selected');
-                enableResize( $(ui[o]) , false);
-            } else {
-                $(ui[o]).addClass('ui-selected');
-                enableResize( $(ui[o]) , true);
-            }
-        }
-    }
-}
-
 function selStop(){
     $.each($('.ui-selected'), function(key, value){
         enableResize( $(value) , true);
@@ -161,8 +157,8 @@ function multiDraggable(){
         }      
     })
 }
-$('.a2').mouseup(aa);
-function aa(obj){
+$('.a2').mouseup(containerMouseup);
+function containerMouseup(obj){
     if(buffer['start resize'] || buffer['start drag']){
         return;
     }
@@ -185,7 +181,7 @@ function aa(obj){
     }
     multiDraggable()
  }
-aa({});
+containerMouseup({});
 });//]]>  
 
 </script>
