@@ -13,4 +13,6 @@ Features:
 
 --Multi selected Draggable.
 
-Watch the demo online: http://jsfiddle.net/xjdawu/WCZ8d/44/
+--zIndex enabled.
+
+Watch the demo online: http://jsfiddle.net/xjdawu/WCZ8d/45/
