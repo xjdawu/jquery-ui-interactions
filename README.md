@@ -13,4 +13,4 @@ Features:
 
 --Multi selected Draggable.
 
-Watch the demo online: http://jsfiddle.net/WCZ8d/40/
+Watch the demo online: http://jsfiddle.net/WCZ8d/42/
