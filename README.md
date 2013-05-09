@@ -8,6 +8,7 @@ It was written for a web canvas. Include drag, select and resize interactions, u
 complete feature: 
 
 --Selectable works fine with lasso and click while combine with Draggable;
+
 --And with 'Ctrl' key.
 
 Watch the demo online: http://jsfiddle.net/WCZ8d/40/
