@@ -40,7 +40,6 @@
 
 
 <script type='text/javascript'>//<![CDATA[ 
-$(window).load(function(){
 var buffer = [];
 $('#d').selectable({
     filter: ".a2",
@@ -75,7 +74,7 @@ function selSelecting(event,ui){
 	if(event.ctrlKey){
  		if( !$(ui.selecting).hasClass( "ui-state-disabled" ) ){
 			$(ui.selecting).removeClass( "ui-selecting" )
-		}
+        }    
 	}
 	//console.log('selSelecting')
 }
@@ -166,7 +165,7 @@ function multiDraggable(){
 }
 $('.a2').mouseup(containerMouseup);
 function containerMouseup(obj){
-    if(buffer['start resize'] || buffer['start drag']){
+    if(buffer['start resize']){
         return;
     }
     if(buffer['start drag'] && $(obj.currentTarget).hasClass('ui-selected')){
@@ -187,6 +186,7 @@ function containerMouseup(obj){
         $('.a2').not(_obj).resizable('disable');
         _obj.addClass('ui-selected');
     }
+    buffer['start drag'] = false;
     multiDraggable()
  }
 containerMouseup({currentTarget:$('#d1')});
