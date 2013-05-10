@@ -25,6 +25,9 @@
 	.ui-selected{
 	    border:1px solid orange;    
 	}
+	.ui-selecting{
+	    border:1px solid rgba(255, 180, 0, 0.5);    
+	}
 	.ui-state-disabled{
 	    opacity: 1;    
 	}
@@ -70,7 +73,7 @@ function selStart(event, ui){
 }
 function selSelecting(event,ui){
 	if(event.ctrlKey){
- 		if( !$(ui.selecting).hasClass( "ui-resizable-disabled" ) ){
+ 		if( !$(ui.selecting).hasClass( "ui-state-disabled" ) ){
 			$(ui.selecting).removeClass( "ui-selecting" )
 		}
 	}
