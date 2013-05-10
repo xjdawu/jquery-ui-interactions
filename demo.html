@@ -101,7 +101,7 @@ function selStop(){
 }
 function multiDraggable(){
     var s = $('.ui-selected');
-    if(s.length == 1){
+    if(s.length < 1){
         $('.a2').draggable({
             containment: 'parent',
             start: function(event, ui){
