@@ -133,11 +133,12 @@ function multiDraggable(){
         drag: function(event, ui){
             var pos = $(this).offset();
             $.each($('.ui-selected') || {}, function(key,value) {
+                var elemPos = $(value).position();
                 var l = pos.left + initLeftOffset[key];
                 var t = pos.top + initTopOffset[key];
                 l = l < mx.left ? mx.left : l;
                 t = t < mx.top  ? mx.top : t;
-                if(l>pos.left || t>pos.top){
+                if(l>elemPos.left || t>elemPos.top){
                     var w = [$(value).width(), $(value).height()];
                     l = l + w[0] > mx.left + wh[0] ? mx.left + wh[0]-w[0] : l;
                     t = t + w[1] > mx.top + wh[1] ? mx.top + wh[1]-w[1] : t;
@@ -146,19 +147,6 @@ function multiDraggable(){
             });
         },
         stop: function(event, ui){
-            var pos = $(this).offset();
-			$.each($('.ui-selected') || {}, function(key,value) {
-                var l = pos.left + initLeftOffset[key];
-                var t = pos.top + initTopOffset[key];
-                l = l < mx.left ? mx.left : l;
-                t = t < mx.top  ? mx.top : t;
-                if(l>pos.left || t>pos.top){
-                var w = [$(value).width(), $(value).height()];
-                    l = l + w[0] > mx.left + wh[0] ? mx.left + wh[0]-w[0] : l;
-                    t = t + w[1] > mx.top + wh[1] ? mx.top + wh[1]-w[1] : t;
-                    $(value).offset({left: l, top: t});	
-                }
-			});
             buffer['start drag'] = false;
         }      
     })
