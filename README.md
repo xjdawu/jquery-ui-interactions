@@ -15,4 +15,4 @@ Features:
 
 --zIndex enabled.
 
-Watch the demo online: http://jsfiddle.net/xjdawu/WCZ8d/45/
+Watch the demo online: http://jsfiddle.net/xjdawu/rd9Ud/
