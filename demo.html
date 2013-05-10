@@ -82,7 +82,9 @@ function unSelecting(event,ui){
 	//console.log('unSelecting')
 }
 function selSelected(event,ui){
-	//console.log('selSelected')
+	    
+    multiDraggable()
+    //console.log('selSelected')
 }
 function enableResize(o, flag){
     o.resizable(flag ? 'enable' : 'disable');
@@ -95,8 +97,7 @@ function selStop(){
     });
     $.each($('.ui-selectee').not('.ui-selected'), function(key, value){
         enableResize( $(value) , false);
-    });    
-    multiDraggable()
+    });
 }
 function multiDraggable(){
     var s = $('.ui-selected');
@@ -122,6 +123,8 @@ function multiDraggable(){
     var wh = [$('#d').width()-2, $('#d').height()-2];
     $('.ui-selected').draggable({
         start: function(event, ui){
+            if(!$(this).hasClass('ui-selected'))
+                return;
             var pos = $(this).position();
             $.each($('.ui-selected'), function(key,value) {
                 var elemPos = $(value).position();
@@ -131,6 +134,8 @@ function multiDraggable(){
             buffer['start drag'] = true;
         },
         drag: function(event, ui){
+            if(!$(this).hasClass('ui-selected'))
+                return;
             var pos = $(this).offset();
             $.each($('.ui-selected') || {}, function(key,value) {
                 var elemPos = $(value).position();
