@@ -13,6 +13,6 @@ Features:
 
 --Multi selected Draggable.
 
---zIndex enabled.
+--zIndex enabled(only tested in Chrome).
 
 Watch the demo online: http://jsfiddle.net/xjdawu/rd9Ud/
